@@ -75,29 +75,23 @@ while True:
         if touches>10:
             print("touch alert!!!")
             open_app_switcher()
-            # p = Popen(['osascript', '-e', open_app_switcher])
             touches = 0
             while True:
                 arduino_data = Arduino_Serial.readline()
                 print('Still touching 😎')
                 if arduino_data == b'left\r\n':
                     key_left()
-                    # p = Popen(['osascript', '-e', key_left])
                 if arduino_data == b'right\r\n':
                     key_right()
-                    # p = Popen(['osascript', '-e', key_right])
                 if arduino_data == b'notouch\r\n':
                     notouches += 1
                 if notouches > 10:
                     close_app_switcher()
-                    # p = Popen(['osascript', '-e', close_app_switcher])
                     notouches = 0
                     break
     elif alt_pressed == True and arduino_data == b'You moved closer\r\n':
         print('You moved closer')
         zoom_out()
-        # p = Popen(['osascript', '-e', zoom_out])
     elif alt_pressed == True and arduino_data == b'You moved away\r\n':
         print('You moved away')
         zoom_in()
-        # p = Popen(['osascript', '-e', zoom_in])
